@@ -17,11 +17,13 @@ entry.grid(row=0, column=0, columnspan=3, ipady=2, pady=2)
 def click(num):
     entry.insert(tk.END, num)
 
+# For "DEL" button
 def backspace():
     current = entry.get()
     if current: #not empty
         entry.delete(len(current) - 1, tk.END)
 
+# For +/- button
 def toggle_sign():
     expr = entry.get()
     if expr.startswith('-'):
@@ -46,11 +48,12 @@ def clear():
 
 #Set buttons
 buttons = [
+    # Field for formula goes here                                                                   # DEL button goes here#
     ('sqrt', 'sqrt(', 1, 0),('(', '(', 1, 1),       (')', ')', 1, 2), ('n!', 'factorial(', 1, 3),   ('/', '/', 1, 4),
     ('^', '^', 2, 0),       ('7', '7', 2, 1),       ('8', '8', 2, 2), ('9', '9', 2, 3),             ('*', '*', 2, 4),
     ('10^', '10**', 3, 0),  ('4', '4', 3, 1),       ('5', '5', 3, 2), ('6', '6', 3, 3),             ('-', '-', 3, 4),
     ('log', 'log10(', 4, 0),('1', '1', 4, 1),       ('2', '2', 4, 2), ('3', '3', 4, 3),             ('+', '+', 4, 4),
-    ('ln', 'log(', 5, 0),   ('+/-', '+/-', 5, 1),   ('0', '0', 5, 2), ('.', '.', 5, 3),             #equal sign goes here#
+    ('ln', 'log(', 5, 0),   ('+/-', '+/-', 5, 1),   ('0', '0', 5, 2), ('.', '.', 5, 3),             # Equal sign goes here#
 ]
 
 for display, value, r, c in buttons:
@@ -61,6 +64,9 @@ for display, value, r, c in buttons:
         tk.Button(frame, text=display, padx=15, pady=5, width=3,
         command=lambda v=value: click(v)).grid(row=r, column=c, pady=2)
 
+# Backspace delete button
 tk.Button(frame, text="Del", padx=10, pady=5, width=4, command=backspace).grid(row=0, column=4, columnspan=1, pady=2)
+# Clear field button
 tk.Button(frame, text="Clear", padx=10, pady=5, width=4, command=clear).grid(row=5, column=2, columnspan=1, pady=2)
+# Execute/calculate formula button
 tk.Button(frame, text="=", padx=10, pady=5, width=4, command=equal).grid(row=5, column=4, columnspan=1, pady=2)
